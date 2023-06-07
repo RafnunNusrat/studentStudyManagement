@@ -1,0 +1,192 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% load
+crispy_forms_tags%} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .text-center {
+        margin-top:600px;
+        background: white;
+        width: 70vw;
+        min-height: 100vh;
+        border-radius: 20px;
+        margin-left: 40%;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .cc {
+        margin-top: 40px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      h2 {
+        margin-top: 50px;
+        width: 100%;
+        font-weight: 700;
+        text-align: left;
+        font-size: 27px;
+        padding: 20px;
+        border-bottom: 1px solid rgb(231, 231, 231);
+      }
+      .cc > * {
+        background: whitesmoke;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+          rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        border: 10px;
+        width: 300px;
+        margin-left: 50px;
+        border-radius: 10px;
+        margin-bottom:20px;
+      }
+      .jj .aa {
+        width: 300px;
+        border: none;
+        background: lightgreen;
+        padding: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+      .jj .bb {
+        padding: 10px;
+        width: 300px;
+        border: none;
+        background: lightgreen;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+      .cc .aa:hover {
+        background: mintcream;
+        border: 1px solid black;
+      }
+      .ce h1 {
+        margin-top: 30px;
+        width: 500px;
+        padding: 10px;
+        font-size: 25px;
+        background: palegreen;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+          rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        border-radius: 10px;
+      }
+      .ca .co {
+        width: 400px;
+      }
+      .ca .co label {
+        width: 100%;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 1px solid rgb(203, 204, 205);
+      }
+      .co h2 {
+        margin-top: 0;
+        background: coral;
+        width: 100%;
+        margin-bottom: 0;
+        padding: 10px;
+        text-align: center;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        border-bottom: 2px solid black;
+      }
+      .co .da {
+        padding: 20px;
+      }
+      .da button {
+        background: black;
+        padding: 10px;
+        width: 250px;
+        margin-top: 20px;
+        border: none;
+        color: white;
+        font-weight: 600;
+      }
+      .ce {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .da small {
+        color: red;
+        font-weight: 600;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="text-center">
+      <div class="con">
+        <h2>Due ToDos</h2>
+        {% if not todo_done %}
+        <div class="cc">
+          {%for o in todos%}
+
+          <div class="co">
+            <h3>{{o.title}}</h3>
+            <p>{{o.desc}}</p>
+            {%if o.is_finished is False%}
+            <form method="POST" class="jj">
+              {%csrf_token%}
+              <button class="aa" type="submit" name="todo" value="{{o.todoId}}">
+                Mark As Finished
+              </button>
+              {%else%}
+              <button class="bb">Done</button>
+              {%endif%}
+            </form>
+          </div>
+
+          {%endfor%}
+        </div>
+        {% else %}
+        <div class="ce">
+          <h1>All To dos are completed!!!!</h1>
+        </div>
+        {% endif %}
+
+        <h2>Due Homeworks</h2>
+
+        <div class="cc ca">
+          {%for o in homeworks%}
+          <div class="co">
+            <h2>{{o.subject}}</h2>
+            <div class="da">
+              <h3>{{o.title}}</h3>
+              <p>{{o.description}}</p>
+              {%if o.is_finished is False%}
+              <form method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <label for="">Add Files</label>
+                <input type="file" name="file" />
+                <button type="submit" name="sub" value="{{o.homeworkId}}">
+                  Submit
+                </button>
+              </form>
+              <small>Due : {{o.due}}</small>
+              {%else%}
+              <form method="POST">
+                {%csrf_token%}
+                <button type="submit" name="view" value="{{o.homeworkId}}">
+                  {{o.fil}}
+                </button>
+              </form>
+              {%endif%}
+            </div>
+          </div>
+
+          {%endfor%}
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+{% endblock content %}

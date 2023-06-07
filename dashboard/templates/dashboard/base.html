@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <style>
+      * {
+        font-family: "Courier New", Courier, monospace;
+      }
+      header {
+        color: whitesmoke;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: cadetblue;
+        height: 100vh;
+        font-size:15px;
+        padding: 20px;
+      }
+      header ul {
+        list-style: none;
+      }
+      .top {
+        margin-top: 40px;
+      }
+      .mid li {
+        font-weight: 600;
+        margin-top: 30px;
+        font-size: 13px;
+      }
+      .mid li a {
+        color: white;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Student-dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/brands.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/solid.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  </head>
+
+  <body>
+    <header>
+      <div class="top"><h3>Student Portal</h3></div>
+      <div class="mid">
+        <ul>
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <i class="fa fa-user"></i>
+            <a href="/profile">Profile</a>
+          </li>
+          <li>
+            <i class="fa fa-sticky-note"></i>
+            <a href="/notes">Notes</a>
+          </li>
+          <li>
+            <i class="fa fa-tasks"></i>
+            <a href="/homework">Homeworks</a>
+          </li>
+          <li>
+            <i class="fa fa-play"></i>
+            <a href="/youtube">Youtube</a>
+          </li>
+          <li>
+            <i class="fa fa-list-ol" aria-hidden="true"></i>
+
+            <a href="/todo">To-Do</a>
+          </li>
+          <li>
+            <i class="fa fa-book" aria-hidden="true"></i>
+            <a href="/books">Books</a>
+          </li>
+          <li>
+            <i class="fa fa-asterisk" aria-hidden="true"></i>
+            <a href="/dictionary">Dictionary</a>
+          </li>
+          <li>
+            <i class="fa fa-database" aria-hidden="true"></i>
+            <a href="/wiki">Wikipedia</a>
+          </li>
+          <li>
+            <i class="fa fa-calculator" aria-hidden="true"></i>
+            <a href="/conversion">Calculator</a>
+          </li>
+          <li>
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            <a href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <br /><br />
+    <main>{% block content %} {% endblock content %}</main>
+
+    {% if messages %} {% for msg in messages %}
+    <div class="alert alert-{{msg.tags}}">{{msg}}</div>
+    {% endfor %} {% endif %}
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

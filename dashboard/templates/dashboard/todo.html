@@ -1,0 +1,78 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% load crispy_forms_tags
+%} {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .con form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 600px;
+        background: whitesmoke;
+        padding: 50px;
+        border-radius: 20px;
+      }
+      .con h2 {
+        margin-bottom: 20px;
+      }
+      .con input {
+        width: 350px;
+        padding: 10px;
+        margin-bottom: 30px;
+      }
+      .con label {
+        margin-bottom: 0;
+        margin-top: 20px;
+      }
+      .con button {
+        background: black;
+        color: white;
+        padding: 10px;
+        width: 350px;
+      }
+      textarea {
+        width: 350px;
+        padding: 10px;
+      }
+      @media screen and (min-width: 600px) {
+        .con {
+          margin-left: 25%;
+        }
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="con">
+      <form method="POST">
+        {%csrf_token%}
+        <h2>Create TO-DO</h2>
+        <input type="text" name="title" placeholder="Enter Title" />
+        <textarea
+          name="desc"
+          id=""
+          cols="30"
+          rows="5"
+          placeholder="Add Desc"
+        ></textarea>
+        <label for="">Do you want us to Remind you?</label>
+        <input type="date" name="date" />
+        <button type="submit" name="create">Create</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,184 @@
+{% extends 'dashboard/base.html' %} {% load static %} {% load crispy_forms_tags
+%} {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      *{
+        font-size:13px
+      }
+      .con {
+        background: aliceblue;
+        min-height: 90vh;
+        border-radius: 20px;
+        padding: 40px;
+        display: flex;
+        margin-left: 25%;
+        width: 70vw;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .con form {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 600px;
+        background: lightsteelblue;
+        padding: 50px;
+        border-radius: 20px;
+      }
+      .con h2 {
+        margin-bottom: 20px;
+        width: 100%;
+        font-weight: 600;
+        border-bottom: 2px solid rgb(224, 224, 224);
+      }
+      .con input {
+        width: 300px;
+        padding: 10px;
+        margin-bottom: 30px;
+      }
+      .con label {
+        margin-bottom: 0;
+        margin-top: 20px;
+      }
+      .con button {
+        background: black;
+        color: white;
+        padding: 10px;
+        width: 350px;
+      }
+      .cc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .con .co {
+        background: whitesmoke;
+        margin-right: 30px;
+        width: 360px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+          rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .co h3 {
+        font-weight: 600;
+      }
+      textarea {
+        width: 350px;
+        padding: 10px;
+        margin-bottom: 30px;
+      }
+      @media screen and (max-width: 480px) {
+        .con {
+          margin-left: 25%;
+        }
+      }
+      .butt {
+        display: flex;
+      }
+      .butt button {
+        background: black;
+        padding: 10px;
+        width: 150px;
+        margin-right: 20px;
+        border: none;
+      }
+      .butt .cd {
+        background: rgb(250, 57, 57);
+        font-weight: 600;
+      }
+      .butt .ce {
+        background: palegreen;
+        color: black;
+        font-weight: 600;
+      }
+      .notun {
+        background: rgba(92, 84, 84, 0.757);
+        position: absolute;
+        width: 80%;
+        left: 23.5%;
+        top: 0;
+        height: 100%;
+        z-index: 5;
+      }
+      .main {
+        background: whitesmoke;
+        position: absolute;
+        left: 40%;
+        z-index: 400;
+        width: 400px;
+        top: 30%;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      .main h3 {
+        margin-top: 0;
+        background: lightseagreen;
+      }
+      .main button {
+        background: black;
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 200px;
+        color: white;
+        font-weight: 600;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {%for msg in messages%} {%if 'note' in msg.tags%}
+    <div class="notun"></div>
+    <div class="main">
+      <h3>{{msg.message.sub.title}}</h3>
+      <p>{{msg.message.sub.description}}</p>
+      <button onclick="history.back()">Close</button>
+    </div>
+    {%endif%} {%endfor%}
+    <div class="con">
+      <h2>Your Notes</h2>
+      <div class="cc">
+        {%for o in notes%}
+        <form method="POST" class="co">
+          {%csrf_token%}
+          <h3>{{o.title}}</h3>
+          <div class="butt">
+            <button class="cd" value="{{o.noteId}}" type="submit" name="delete">
+              Delete
+            </button>
+            <button class="ce" value="{{o.noteId}}" type="submit" name="view">
+              View
+            </button>
+          </div>
+        </form>
+        {%endfor%}
+      </div>
+      <form method="POST">
+        {%csrf_token%}
+        <h3>Create Notes</h3>
+        <input type="text" name="title" placeholder="Enter Title" />
+        <textarea
+          name="desc"
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="Add Description"
+        ></textarea>
+        <button type="submit" name="notes">Create</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+{% endblock content %}

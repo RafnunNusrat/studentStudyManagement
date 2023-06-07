@@ -1,0 +1,158 @@
+{% load static %} {% load crispy_forms_tags %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      * {
+        font-family: "Courier New", Courier, monospace;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .con form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 500px;
+        background: lightcoral;
+        padding: 50px;
+        border-radius: 20px;
+      }
+      .con h2 {
+        margin-bottom: 20px;
+      }
+      .con input {
+        width: 300px;
+        padding: 15px;
+        margin-bottom: 30px;
+      }
+      .con label {
+        margin-bottom: 0;
+        margin-top: 20px;
+      }
+      .con button {
+        background: black;
+        color: white;
+        padding: 10px;
+        font-size: 20px;
+        width: 300px;
+      }
+      small {
+        margin-top: 40px;
+        font-size: 20px;
+      }
+      small a {
+        color: white;
+      }
+      .notun {
+        background: rgba(92, 84, 84, 0.757);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+      }
+
+      #alert1 {
+        background: salmon;
+        position: absolute;
+        left: 40%;
+        z-index: 400;
+        width: 300px;
+        padding: 40px;
+        top: 30%;
+        border-radius: 10px;
+        text-align: center;
+        color: white;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      #alert2 {
+        background: rgb(101, 206, 108);
+        position: absolute;
+        z-index: 400;
+        width: 300px;
+        padding: 40px;
+        top: 30%;
+        left: 40%;
+        border-radius: 10px;
+        text-align: center;
+        color: white;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      #alert1 button {
+        background: black;
+        color: white;
+        font-size: 19px;
+        font-weight: 600;
+        padding: 10px;
+        border: 2px solid black;
+        width: 150px;
+        border-radius: 5px;
+      }
+      #alert2 button {
+        background: black;
+        color: white;
+        font-size: 19px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 5px;
+        border: 2px solid black;
+        width: 150px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% for msg in messages%} {% if 'error' in msg.tags%}
+    <div class="notun"></div>
+    <div
+      id="alert1"
+      class="alert alert-danger alert-dismissible fade show"
+      role="alert"
+    >
+      <div class="sub">
+        <h3>Error Occurred !</h3>
+        <p>{{msg}}</p>
+      </div>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {%elif 'success' in msg.tags%}
+    <div class="notun"></div>
+    <div
+      id="alert2"
+      class="alert alert-danger alert-dismissible fade show"
+      role="alert"
+    >
+      <i id="ok" class="fa fa-check"></i>
+      <div class="sub">
+        <h3>Success</h3>
+        <p>{{msg}}</p>
+      </div>
+      <button class="button" onclick="window.location.href='/login'">
+        Close
+      </button>
+    </div>
+    {%endif%} {%endfor%}
+    <div class="con">
+      <form method="POST">
+        <h2>Register</h2>
+        {%csrf_token%}
+        <input type="text" name="name" placeholder="Enter Name" />
+        <input type="email" name="email" placeholder="Enter Email" />
+        <input type="usernmae" name="user" placeholder="Enter Usename" />
+        <input type="password" name="pass" placeholder="Enter Password" />
+        <button type="submit" name="reg">Register</button>
+        <small><a href="/login">Already have an account?</a></small>
+      </form>
+    </div>
+  </body>
+</html>
+
+{% endblock content %}
